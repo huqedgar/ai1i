@@ -38,51 +38,47 @@ const ImageEnhancer = () => {
 
    const handleEnhanceSubmit = async (e) => {
       e.preventDefault();
-      if (!image) {
-         toast('🐼 You must select photo', {
-            position: 'bottom-right'
-         });
-         return;
-      }
-      setIsLoading(true);
-      toastId.current = toast.loading('Weather is working hard...', { position: 'bottom-right' });
+      // if (!image) {
+      //    toast('🐼 You must select photo', {
+      //       position: 'bottom-right'
+      //    });
+      //    return;
+      // }
+      // setIsLoading(true);
+      // toastId.current = toast.loading('Weather is working hard...', { position: 'bottom-right' });
 
-      const url = 'https://super-image1.p.rapidapi.com/v2/run';
-      const options = {
-         method: 'POST',
-         headers: {
-            'Access-Control-Allow-Origin:': '*',
-            'content-type': 'application/json',
-            'X-RapidAPI-Key': 'c84de3135emshaee62832924cb90p1be106jsn13cee420d9b8',
-            'X-RapidAPI-Host': 'super-image1.p.rapidapi.com'
-         },
-         body: {
-            upscale: 4,
-            image: 'https://jixjiastorage.blob.core.windows.net/public/sensor-ai/super_image/audi.jpg'
-         }
-      };
+      // try {
+      //    const url = 'https://super-image1.p.rapidapi.com/run';
+      //    const options = {
+      //       method: 'POST',
+      //       headers: {
+      //          'content-type': 'application/json',
+      //          'X-RapidAPI-Key': 'c84de3135emshaee62832924cb90p1be106jsn13cee420d9b8',
+      //          'X-RapidAPI-Host': 'super-image1.p.rapidapi.com'
+      //       },
+      //       body: {
+      //          upscale: 2,
+      //          image: 'https://jixjiastorage.blob.core.windows.net/public/sensor-ai/super_image/audi.jpg'
+      //       }
+      //    };
 
-      try {
-         const response = await fetch(url, options);
-         const result = await response.text();
-         console.log('response: ', response);
-         console.log('result: ', result);
-         console.log('output_url: ', response.output_url);
+      //    const response = await fetch(url, options);
+      //    const result = await response.text();
 
-         if (result) {
-            setImageOutput(response.output_url);
-            toastUpdate(toastId.current, '🐼 Successfully', 'default');
-         } else {
-            toastUpdate(toastId.current, 'Failed to enhance image', 'error');
-         }
-      } catch (ex) {
-         toast.error('An error has occurred');
-         console.error(ex);
-      } finally {
-         toastTimeout.current = setTimeout(() => {
-            setIsLoading(false);
-         }, 500);
-      }
+      //    if (response.ok) {
+      //       setImageOutput(response.output_url);
+      //       toastUpdate(toastId.current, '🐼 Successfully', 'default');
+      //    } else {
+      //       toastUpdate(toastId.current, 'Failed to enhance image', 'error');
+      //    }
+      // } catch (ex) {
+      //    toast.error('An error has occurred');
+      //    console.error(ex);
+      // } finally {
+      //    toastTimeout.current = setTimeout(() => {
+      //       setIsLoading(false);
+      //    }, 500);
+      // }
    };
 
    const handleDownload = () => {
@@ -139,7 +135,7 @@ const ImageEnhancer = () => {
                   itemTwo={
                      <ReactCompareSliderImage
                         alt='Image Two'
-                        src={imageOutput ? imageOutput : null}
+                        src={imageOutput ? `data:image/png;base64, ${imageOutput}` : null}
                         style={{ transform: 'scale(1.125)' }}
                      />
                   }

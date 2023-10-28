@@ -17,7 +17,7 @@ const NotFound = () => {
             <h2>Không tìm thấy trang</h2>
             <span>Rất tiếc, không thể tìm thấy trang bạn yêu cầu</span>
          </div>
-         <button>Quay lại</button>
+         <button onClick={goBack}>Quay lại</button>
       </section>
    );
 };

@@ -1,8 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import Loading from './pages/Loading/Loading';
+import LoadingSpinner from './shared/LoadingSpinner/LoadingSpinner';
 
-const MainLayout = lazy(() => wait(1000).then(() => import('./layouts/MainLayout/MainLayout.jsx')));
+const MainLayout = lazy(() => wait(2000).then(() => import('./layouts/MainLayout/MainLayout.jsx')));
 const ImageGenerator = lazy(() => import('./components/ImageGenerator/ImageGenerator.jsx'));
 const ImageEnhancer = lazy(() => import('./components/ImageEnhancer/ImageEnhancer.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
@@ -23,11 +24,19 @@ export default function useRouteElements() {
             },
             {
                path: 'image-generator',
-               element: <ImageGenerator />
+               element: (
+                  <Suspense fallback={<LoadingSpinner />}>
+                     <ImageGenerator />
+                  </Suspense>
+               )
             },
             {
                path: 'image-enhancer',
-               element: <ImageEnhancer />
+               element: (
+                  <Suspense fallback={<LoadingSpinner />}>
+                     <ImageEnhancer />
+                  </Suspense>
+               )
             }
          ]
       },
