@@ -1,0 +1,62 @@
+@import '../../styles/variables.scss';
+@import '../../styles/responsive.scss';
+
+.page404 {
+   width: 100dvw;
+   height: 100dvh;
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 100;
+   background-color: transparent;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding-bottom: 30px;
+
+   .pageInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 0px 30px 0px;
+
+      h2 {
+         font-size: 30px;
+      }
+
+      span {
+         font-size: 14px;
+      }
+   }
+
+   h1 {
+      font-size: 80px;
+   }
+
+   img {
+      height: 300px;
+   }
+
+   button {
+      letter-spacing: 0.5px;
+      font-weight: 550;
+      color: white;
+      background: $bg-secondary;
+      background-blend-mode: overlay;
+      padding: 10px 15px;
+      border: 0.1rem solid #fff;
+      border-radius: 2px;
+      cursor: pointer;
+
+      &:hover {
+         background: $bg-primary;
+         background-blend-mode: hard-light;
+      }
+
+      &:active {
+         transform: scale(0.99);
+      }
+   }
+}

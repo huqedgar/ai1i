@@ -1,0 +1,89 @@
+@import '../../styles/variables.scss';
+@import '../../styles/responsive.scss';
+
+.imageEnhancerContainer {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 15px;
+   padding: 45px 5dvw 15px 5dvw;
+}
+
+.formUploadContainer {
+   width: 100%;
+   height: 512px;
+}
+
+.formUpload {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 5px;
+   font-size: 1rem;
+   border: 2px dashed white;
+   border-radius: 5px;
+   cursor: pointer;
+
+   img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+   }
+
+   svg {
+      width: 60px;
+      height: 60px;
+   }
+}
+
+.uploadedRow {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-radius: 5px;
+   border: 2px solid white;
+   margin-top: 15px;
+   padding: 5px;
+   gap: 10px;
+
+   button {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.5px;
+      font-weight: 550;
+      color: white;
+      background: $bg-secondary;
+      background-blend-mode: overlay;
+      padding: 9px 12px;
+      border: 0.1rem solid #fff;
+      border-radius: 2px;
+      cursor: pointer;
+
+      &:hover {
+         background: $bg-primary;
+         background-blend-mode: hard-light;
+      }
+
+      &:active {
+         transform: scale(0.99);
+      }
+   }
+}
+
+.uploadContent {
+   display: flex;
+   align-items: center;
+   padding: 10px;
+   gap: 15px;
+   color: white;
+
+   svg {
+      cursor: pointer;
+   }
+}

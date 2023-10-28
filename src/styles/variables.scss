@@ -1,0 +1,22 @@
+$offset: 187;
+$duration: 1.4s;
+$color-bg1: rgb(110, 0, 165);
+$color-bg2: #151515;
+
+$color1: rgb(20, 115, 255);
+$color2: rgb(220, 75, 255);
+$color3: rgb(100, 220, 255);
+$color4: rgb(200, 50, 50);
+$color5: rgb(180, 180, 50);
+$color-interactive: rgb(140, 100, 255);
+$circle-size: 80%;
+$blending: hard-light;
+
+$bg-primary: linear-gradient(hotpink, transparent), linear-gradient(90deg, skyblue, transparent),
+   linear-gradient(-90deg, lightcoral, transparent);
+
+$bg-secondary: linear-gradient(rgba(255, 105, 180, 0.9), transparent),
+   linear-gradient(90deg, rgba(135, 206, 235, 0.9), transparent),
+   linear-gradient(-90deg, rgba(240, 128, 128, 0.9), transparent);
+
+$box-shadow-primary: 0 0 4px #00000033;

@@ -1,0 +1,121 @@
+@import '../../styles/variables.scss';
+@import '../../styles/responsive.scss';
+
+.section {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 15px;
+   padding: 45px 5dvw 15px 5dvw;
+}
+
+.generate {
+   width: 100%;
+   height: 50px;
+   position: relative;
+
+   svg {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: white;
+      z-index: 1;
+   }
+
+   input {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      padding: 0 100px 0 40px;
+      border-radius: 2px;
+      border: none;
+      outline: 2px solid white;
+      box-shadow: $box-shadow-primary;
+      background-color: transparent;
+      color: white;
+   }
+
+   button {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      letter-spacing: 0.75px;
+      font-weight: 550;
+      color: white;
+      background: $bg-secondary;
+      background-blend-mode: overlay;
+      padding: 9px 12px;
+      border: 0.1rem solid #fff;
+      border-radius: 2px;
+      cursor: pointer;
+
+      &:hover {
+         background: $bg-primary;
+         background-blend-mode: hard-light;
+      }
+
+      &:active {
+         transform: scale(0.99);
+      }
+   }
+}
+
+.imageContainer {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-evenly;
+   padding: 25px 0px;
+   gap: 35px;
+}
+
+.image {
+   width: 256px;
+   height: 256px;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 2px;
+   box-shadow: $box-shadow-primary;
+
+   &:hover button {
+      opacity: 1;
+   }
+
+   img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+   }
+
+   button {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      letter-spacing: 0.75px;
+      font-weight: 750;
+      color: white;
+      background: $bg-secondary;
+      background-blend-mode: overlay;
+      padding: 9px 12px;
+      border: 0.1rem solid #fff;
+      border-radius: 2px;
+      cursor: pointer;
+      opacity: 0; /* Đặt mặc định opacity = 0 */
+      transition: opacity 0.3s ease-in-out; /* Thêm hiệu ứng chuyển động */
+      z-index: 1;
+
+      &:hover {
+         background: $bg-primary;
+         background-blend-mode: hard-light;
+      }
+
+      &:active {
+         transform: scale(0.99);
+      }
+   }
+}
