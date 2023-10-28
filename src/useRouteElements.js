@@ -5,6 +5,7 @@ import LoadingSpinner from './shared/LoadingSpinner/LoadingSpinner';
 
 const MainLayout = lazy(() => wait(2000).then(() => import('./layouts/MainLayout/MainLayout.jsx')));
 const ImageGenerator = lazy(() => import('./components/ImageGenerator/ImageGenerator.jsx'));
+const ImageRemoval = lazy(() => import('./components/ImageRemoval/ImageRemoval.jsx'));
 const ImageEnhancer = lazy(() => import('./components/ImageEnhancer/ImageEnhancer.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
 
@@ -27,6 +28,14 @@ export default function useRouteElements() {
                element: (
                   <Suspense fallback={<LoadingSpinner />}>
                      <ImageGenerator />
+                  </Suspense>
+               )
+            },
+            {
+               path: 'image-removal',
+               element: (
+                  <Suspense fallback={<LoadingSpinner />}>
+                     <ImageRemoval />
                   </Suspense>
                )
             },

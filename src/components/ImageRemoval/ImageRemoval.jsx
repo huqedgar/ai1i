@@ -1,18 +1,18 @@
 import classNames from 'classnames/bind';
-import styles from './ImageEnhancer.module.scss';
+import styles from './ImageRemoval.module.scss';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import useToastAlert from '../../hooks/useToastAlert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faBolt, faCloudArrowUp, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faCloudArrowUp, faTrash, faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 import LoadingSpinner from '../../shared/LoadingSpinner/LoadingSpinner';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const cx = classNames.bind(styles);
 
-const ImageEnhancer = () => {
+const ImageRemoval = () => {
    const avatar = useRef(null);
    const [image, setImage] = useState(null);
    const [imageOutput, setImageOutput] = useState(null);
@@ -38,47 +38,46 @@ const ImageEnhancer = () => {
 
    const handleEnhanceSubmit = async (e) => {
       e.preventDefault();
-      // if (!image) {
-      //    toast('🐼 You must select photo', {
-      //       position: 'bottom-right'
-      //    });
-      //    return;
-      // }
-      // setIsLoading(true);
-      // toastId.current = toast.loading('Weather is working hard...', { position: 'bottom-right' });
+      if (!image) {
+         toast('🐼 You must select photo', {
+            position: 'bottom-right'
+         });
+         return;
+      }
+      setIsLoading(true);
+      toastId.current = toast.loading('Weather is working hard...', { position: 'bottom-right' });
 
-      // try {
-      //    const url = 'https://super-image1.p.rapidapi.com/run';
-      //    const options = {
-      //       method: 'POST',
-      //       headers: {
-      //          'content-type': 'application/json',
-      //          'X-RapidAPI-Key': 'c84de3135emshaee62832924cb90p1be106jsn13cee420d9b8',
-      //          'X-RapidAPI-Host': 'super-image1.p.rapidapi.com'
-      //       },
-      //       body: {
-      //          upscale: 2,
-      //          image: 'https://jixjiastorage.blob.core.windows.net/public/sensor-ai/super_image/audi.jpg'
-      //       }
-      //    };
+      const url = 'https://background-removal13.p.rapidapi.com/api/v1/uploadFile';
+      const data = new FormData();
+      data.append('file', avatar.current.files[0]);
 
-      //    const response = await fetch(url, options);
-      //    const result = await response.text();
+      const options = {
+         method: 'POST',
+         headers: {
+            'X-RapidAPI-Key': 'c84de3135emshaee62832924cb90p1be106jsn13cee420d9b8',
+            'X-RapidAPI-Host': 'background-removal13.p.rapidapi.com'
+         },
+         body: data
+      };
 
-      //    if (response.ok) {
-      //       setImageOutput(response.output_url);
-      //       toastUpdate(toastId.current, '🐼 Successfully', 'default');
-      //    } else {
-      //       toastUpdate(toastId.current, 'Failed to enhance image', 'error');
-      //    }
-      // } catch (ex) {
-      //    toast.error('An error has occurred');
-      //    console.error(ex);
-      // } finally {
-      //    toastTimeout.current = setTimeout(() => {
-      //       setIsLoading(false);
-      //    }, 500);
-      // }
+      try {
+         const response = await fetch(url, options);
+         const result = await response.text();
+
+         if (response.ok) {
+            setImageOutput(JSON.parse(result).base64);
+            toastUpdate(toastId.current, '🐼 Successfully', 'default');
+         } else {
+            toastUpdate(toastId.current, 'Failed to enhance image', 'error');
+         }
+      } catch (ex) {
+         toast.error('An error has occurred');
+         console.error(ex);
+      } finally {
+         toastTimeout.current = setTimeout(() => {
+            setIsLoading(false);
+         }, 500);
+      }
    };
 
    const handleDownload = () => {
@@ -100,7 +99,7 @@ const ImageEnhancer = () => {
    }, []);
 
    return (
-      <section className={cx('imageEnhancerContainer')}>
+      <section className={cx('ImageRemovalContainer')}>
          <form onSubmit={handleEnhanceSubmit} className={cx('formUploadContainer')}>
             {imageOutput === null ? (
                <div className={cx('formUpload')} onClick={() => document.querySelector('.input-field').click()}>
@@ -117,7 +116,7 @@ const ImageEnhancer = () => {
                   ) : (
                      <>
                         <FontAwesomeIcon icon={faCloudArrowUp} />
-                        <p>Browse files to enhance</p>
+                        <p>Browse files to background removal</p>
                      </>
                   )}
                </div>
@@ -134,7 +133,7 @@ const ImageEnhancer = () => {
                   itemOne={
                      <ReactCompareSliderImage
                         src={image ? image : null}
-                        style={{ objectFit: 'contain' }}
+                        style={{ objectFit: 'contain', border: '2px dashed white', borderRadius: 5 }}
                         alt='Image One'
                      />
                   }
@@ -142,8 +141,10 @@ const ImageEnhancer = () => {
                      <ReactCompareSliderImage
                         src={imageOutput ? `data:image/png;base64, ${imageOutput}` : null}
                         style={{
-                           transform: 'scale(1.125)',
-                           objectFit: 'contain'
+                           transform: 'scale(1)',
+                           objectFit: 'contain',
+                           border: '2px dashed white',
+                           borderRadius: 5
                         }}
                         alt='Image Two'
                      />
@@ -156,8 +157,8 @@ const ImageEnhancer = () => {
                {imageOutput === null ? (
                   <>
                      <button type='submit' disabled={isLoading ? true : false}>
-                        <FontAwesomeIcon icon={faBolt} />
-                        <span>Enhance</span>
+                        <FontAwesomeIcon icon={faWandMagicSparkles} />
+                        <span>Removal</span>
                      </button>
                      <div className={cx('uploadContent')}>
                         <span>{fileName}</span>
@@ -204,4 +205,4 @@ const ImageEnhancer = () => {
    );
 };
 
-export default ImageEnhancer;
+export default ImageRemoval;

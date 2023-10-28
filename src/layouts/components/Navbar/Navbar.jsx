@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage, faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
+import { faBolt, faImage, faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
 import { Link, useLocation } from 'react-router-dom';
@@ -21,10 +21,16 @@ const Navbar = () => {
                   icon={faImage}
                />
             </Link>
+            <Link to={'/image-removal'}>
+               <FontAwesomeIcon
+                  className={cx('icon', location.pathname === '/image-removal' ? 'selected' : null)}
+                  icon={faWandMagicSparkles}
+               />
+            </Link>
             <Link to={'/image-enhancer'}>
                <FontAwesomeIcon
                   className={cx('icon', location.pathname === '/image-enhancer' ? 'selected' : null)}
-                  icon={faWandMagicSparkles}
+                  icon={faBolt}
                />
             </Link>
          </div>
