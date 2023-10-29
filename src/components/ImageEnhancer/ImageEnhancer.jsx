@@ -149,7 +149,7 @@ const ImageEnhancer = () => {
                      />
                   }
                   position={50}
-                  style={{ width: '100%', height: '450px' }}
+                  style={{ width: '100%', height: '400px' }}
                />
             )}
             <div className={cx('uploadedRow')}>

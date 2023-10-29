@@ -82,10 +82,25 @@ const ImageRemoval = () => {
 
    const handleDownload = () => {
       if (!imageOutput) return;
+
+      // Tạo một đối tượng Blob từ dữ liệu base64.
+      const byteCharacters = atob(imageOutput);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+         byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/png' });
+
+      // Tạo một URL cho đối tượng Blob và tạo một liên kết tải về.
+      const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = imageOutput;
+      a.href = url;
       a.download = 'image.png';
       a.click();
+
+      // Giải phóng URL khi không cần nữa.
+      URL.revokeObjectURL(url);
    };
 
    // Cleanup useEffect to clear the toastTimeout when the component unmounts or when it's updated.
@@ -150,7 +165,7 @@ const ImageRemoval = () => {
                      />
                   }
                   position={50}
-                  style={{ width: '100%', height: '450px' }}
+                  style={{ width: '100%', height: '400px' }}
                />
             )}
             <div className={cx('uploadedRow')}>

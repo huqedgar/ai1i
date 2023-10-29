@@ -10,45 +10,45 @@ const cx = classNames.bind(styles);
 function App() {
    const routeElements = useRouteElements();
    const interBubbleRef = useRef(null);
-   const curX = useRef(0);
-   const curY = useRef(0);
-   const tgX = useRef(0);
-   const tgY = useRef(0);
+   //  const curX = useRef(0);
+   //  const curY = useRef(0);
+   //  const tgX = useRef(0);
+   //  const tgY = useRef(0);
 
-   useEffect(() => {
-      const interBubble = interBubbleRef.current;
-      let animationFrameId = null;
+   //  useEffect(() => {
+   //     const interBubble = interBubbleRef.current;
+   //     let animationFrameId = null;
 
-      const handleMouseMove = () => {
-         curX.current += (tgX.current - curX.current) / 20;
-         curY.current += (tgY.current - curY.current) / 20;
-         interBubble.style.transform = `translate(${Math.round(curX.current)}px, ${Math.round(curY.current)}px)`;
+   //     const handleMouseMove = () => {
+   //        curX.current += (tgX.current - curX.current) / 20;
+   //        curY.current += (tgY.current - curY.current) / 20;
+   //        interBubble.style.transform = `translate(${Math.round(curX.current)}px, ${Math.round(curY.current)}px)`;
 
-         // Thay vì kiểm tra bằng Math.abs
-         const threshold = 1;
-         if (Math.abs(tgX.current - curX.current) < threshold && Math.abs(tgY.current - curY.current) < threshold) {
-            cancelAnimationFrame(animationFrameId);
-            animationFrameId = null;
-         } else {
-            animationFrameId = requestAnimationFrame(handleMouseMove);
-         }
-      };
+   //        // Thay vì kiểm tra bằng Math.abs
+   //        const threshold = 1;
+   //        if (Math.abs(tgX.current - curX.current) < threshold && Math.abs(tgY.current - curY.current) < threshold) {
+   //           cancelAnimationFrame(animationFrameId);
+   //           animationFrameId = null;
+   //        } else {
+   //           animationFrameId = requestAnimationFrame(handleMouseMove);
+   //        }
+   //     };
 
-      const handleMouseMoveWrapper = (e) => {
-         tgX.current = e.clientX;
-         tgY.current = e.clientY;
+   //     const handleMouseMoveWrapper = (e) => {
+   //        tgX.current = e.clientX;
+   //        tgY.current = e.clientY;
 
-         if (!animationFrameId) {
-            animationFrameId = requestAnimationFrame(handleMouseMove);
-         }
-      };
-      document.addEventListener('mousemove', handleMouseMoveWrapper);
+   //        if (!animationFrameId) {
+   //           animationFrameId = requestAnimationFrame(handleMouseMove);
+   //        }
+   //     };
+   //     document.addEventListener('mousemove', handleMouseMoveWrapper);
 
-      return () => {
-         cancelAnimationFrame(animationFrameId);
-         document.removeEventListener('mousemove', handleMouseMoveWrapper);
-      };
-   }, []); // Chạy một lần khi component được mount
+   //     return () => {
+   //        cancelAnimationFrame(animationFrameId);
+   //        document.removeEventListener('mousemove', handleMouseMoveWrapper);
+   //     };
+   //  }, []); // Chạy một lần khi component được mount
 
    return (
       <>
